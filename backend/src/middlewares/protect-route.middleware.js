@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
 const { 
-        UnauthenticatedError, 
-        NotFoundError 
-      } = require('../erros/index')
+  NotFoundError,
+  UnauthenticatedError, 
+} = require('../errors/index.js')
 
 
 const protectRoute = async (req, res, next) => {

@@ -1,5 +1,5 @@
 const User = require('../models/user.model')
-const { BadRequestError } = require('../erros')
+const { BadRequestError } = require('../errors')
 const bcrypt = require('bcryptjs')
 const generateToken = require('../lib/utils')
 const cloudinary = require('../lib/cloudinary')
@@ -7,11 +7,9 @@ const cloudinary = require('../lib/cloudinary')
 const signup = async (req, res) => {
   const { fullName, email, password } = req.body
 
-  const exisitngUser = await User.findOne({ email });
+  const existingUser = await User.findOne({ email });
   
-  console.log('DB is searched for the user')
-
-  if(exisitngUser) 
+  if(existingUser) 
     throw new BadRequestError('Email already exists')
 
   // hash password
