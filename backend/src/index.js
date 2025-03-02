@@ -31,7 +31,7 @@ app.use(cors( // to allow cookie and authorization header to be send with the re
 ))
 
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/message', messageRoutes);
+app.use('/api/v1/messages', messageRoutes);
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

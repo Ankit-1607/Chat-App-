@@ -8,7 +8,7 @@ const {
   sendMessage
 } = require('../controllers/message.controller')
 
-router.get('/user', protectRoute, getUsersForSidebar)
+router.get('/users', protectRoute, getUsersForSidebar)
 router.get('/:id', protectRoute, getMessages)
 
 router.post('/send/:id', protectRoute, sendMessage)

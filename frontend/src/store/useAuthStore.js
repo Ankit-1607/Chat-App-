@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { axiosInstance } from '../lib/axios.js';
 import toast from 'react-hot-toast';
+import { data } from 'react-router-dom';
 
 
 // custom hook for user authentication state
@@ -13,6 +14,8 @@ export const useAuthStore = create((set) => ({
   isLoggingOut: false,
 
   isCheckingAuth: true, // loading state for checking auth
+
+  onlineUsers: [],
 
   checkAuth: async () => {
     try {
@@ -66,5 +69,16 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  
+  updateProfile: async (data) => {
+    set({isUpdatingProfile: true});
+    try {
+      const res = await axiosInstance.put('/auth/update-profile', data);
+      set({authUser: res.data});
+      toast.success('Profile updated successfully');
+    } catch (error) {
+      toast.error(error.response.data.msg);
+    } finally {
+      set({isUpdatingProfile: false});
+    }
+  },  
 }))
