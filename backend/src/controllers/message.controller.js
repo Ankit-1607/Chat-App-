@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const Message = require('../models/message.model')
 const cloudinary = require('../lib/cloudinary')
+const { getReceiverSocketId, io } = require('../lib/socket')
 
 const getUsersForSidebar = async (req, res) => {
   
@@ -49,6 +50,12 @@ const sendMessage = async (req, res) => {
   await newMessage.save()  
 
   // real time functionality using socket.io
+  const receiverSocketId = getReceiverSocketId(receiverId);
+  // when new message is sent if the receiver is online send them the message in realtime, i.e., without any page refresh
+  if(receiverSocketId) {
+    io.to(receiverSocketId).emit('newMessage', newMessage);// broadcast to a specified user
+  }
+
 
   res.status(201).json(newMessage)
 }
