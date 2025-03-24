@@ -2,12 +2,10 @@ require('dotenv').config();
 require('express-async-errors')
 
 const { app, server } = require('./lib/socket')
-
 const cors = require('cors');
-
 const express = require('express');
-
 const cookieParser = require('cookie-parser')
+const path = require('path');
 
 // import middlewares
 const notFoundMiddleware = require('./middlewares/not-found.middleware')
@@ -39,6 +37,15 @@ app.use(errorHandlerMiddleware)
 
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
+const __dirname = path.resolve();
+
+if(process.env.NODE_ENV==='production') {
+  app.use(express.static(path.join(__dirname,'../frontend/dist')));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'))
+  })
+}
 
 const start = async () => {
   try {
