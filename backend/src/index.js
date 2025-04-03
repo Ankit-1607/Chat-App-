@@ -1,23 +1,22 @@
-require('dotenv').config();
-require('express-async-errors')
+import 'dotenv/config';
+import 'express-async-errors';
 
-const { app, server } = require('./lib/socket')
-const cors = require('cors');
-const express = require('express');
-const cookieParser = require('cookie-parser')
-const path = require('path');
+import { app, server } from './lib/socket.js';
+import cors from 'cors';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import path from 'path';
 
 // import middlewares
-const notFoundMiddleware = require('./middlewares/not-found.middleware')
-const errorHandlerMiddleware = require('./middlewares/error-handler.middleware')
+import notFoundMiddleware from './middlewares/not-found.middleware.js';
+import errorHandlerMiddleware from './middlewares/error-handler.middleware.js';
 
 // import routes
-const authRoutes = require('./routes/auth.route');
-const messageRoutes = require('./routes/message.route');
+import authRoutes from './routes/auth.route.js';
+import messageRoutes from './routes/message.route.js';
 
 // setup DB
-const connectDB = require('./db/connect.db')
-
+import connectDB from './db/connect.db.js';
 
 // middlewares
 app.use(express.json()) // for parsing req object

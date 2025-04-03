@@ -1,10 +1,10 @@
-const User = require('../models/user.model')
-const { BadRequestError } = require('../errors')
-const bcrypt = require('bcryptjs')
-const generateToken = require('../lib/utils')
-const cloudinary = require('../lib/cloudinary')
+import User from '../models/user.model.js';
+import { BadRequestError } from '../errors/index.js';
+import bcrypt from 'bcryptjs';
+import generateToken from '../lib/utils.js';
+import cloudinary from '../lib/cloudinary.js';
 
-const signup = async (req, res) => {
+export const signup = async (req, res) => {
   const { fullName, email, password } = req.body
 
   const existingUser = await User.findOne({ email });
@@ -40,7 +40,7 @@ const signup = async (req, res) => {
   }
 }
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body
 
   const existingUser = await User.findOne({ email })
@@ -64,7 +64,7 @@ const login = async (req, res) => {
   })
 }
 
-const logout = (req, res) => {
+export const logout = (req, res) => {
   res.cookie('token', '', {
     maxAge: 0
   })
@@ -74,7 +74,7 @@ const logout = (req, res) => {
   })
 }
 
-const updateProfile = async (req, res) => {
+export const updateProfile = async (req, res) => {
   const { profilePic } = req.body
   const existingUser = req.existingUser._id
 
@@ -89,14 +89,6 @@ const updateProfile = async (req, res) => {
   res.status(200).json(updatedUser)
 }
 
-const checkAuth = (req, res) => {
+export const checkAuth = (req, res) => {
   res.status(200).json(req.existingUser)
-}
-
-module.exports = {
-  signup,
-  login,
-  logout,
-  updateProfile,
-  checkAuth
 }

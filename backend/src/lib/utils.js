@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken';
 
 const generateToken = (userId, res) => {
 
@@ -14,4 +14,4 @@ const generateToken = (userId, res) => {
   return token
 }
 
-module.exports = generateToken
+export default generateToken
