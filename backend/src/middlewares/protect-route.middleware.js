@@ -1,10 +1,7 @@
-const jwt = require('jsonwebtoken')
-const User = require('../models/user.model')
-const { 
-  NotFoundError,
-  UnauthenticatedError, 
-} = require('../errors/index.js')
-
+import jwt from 'jsonwebtoken'
+import User from '../models/user.model.js'
+import { NotFoundError, 
+  UnauthenticatedError } from '../errors/index.js'
 
 const protectRoute = async (req, res, next) => {
   const token = req.cookies.token
@@ -29,4 +26,4 @@ const protectRoute = async (req, res, next) => {
   next() // control goes to updateProfile or checkAuth
 }
 
-module.exports = protectRoute
+export default protectRoute

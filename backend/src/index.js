@@ -1,23 +1,23 @@
-require('dotenv').config();
-require('express-async-errors')
+import dotenv from 'dotenv';
+import 'express-async-errors'; // to handle async errors in express routes
+dotenv.config(); // load environment variables from .env file
 
-const { app, server } = require('./lib/socket')
-const cors = require('cors');
-const express = require('express');
-const cookieParser = require('cookie-parser')
-const path = require('path');
+import {app, server} from './lib/socket.js'; // import socket.io setup
+import cors from 'cors';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import path from 'path';
 
 // import middlewares
-const notFoundMiddleware = require('./middlewares/not-found.middleware')
-const errorHandlerMiddleware = require('./middlewares/error-handler.middleware')
+import notFoundMiddleware from './middlewares/not-found.middleware.js';
+import errorHandlerMiddleware from './middlewares/error-handler.middleware.js';
 
 // import routes
-const authRoutes = require('./routes/auth.route');
-const messageRoutes = require('./routes/message.route');
+import authRoutes from './routes/auth.route.js';
+import messageRoutes from './routes/message.route.js';
 
 // setup DB
-const connectDB = require('./db/connect.db')
-
+import connectDB from './db/connect.db.js'; // ensure DB connection is established
 
 // middlewares
 app.use(express.json()) // for parsing req object
@@ -32,7 +32,7 @@ app.use(cors( // to allow cookie and authorization header to be send with the re
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/messages', messageRoutes);
 
-app.use(notFoundMiddleware)
+
 app.use(errorHandlerMiddleware)
 
 
@@ -46,7 +46,7 @@ if(process.env.NODE_ENV==='production') {
     res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'))
   })
 }
-
+app.use(notFoundMiddleware)
 const start = async () => {
   try {
     // connecting to DB

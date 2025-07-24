@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-
+import mongoose from "mongoose";
 const messageSchema = new mongoose.Schema(
   {
     senderId: {
@@ -22,4 +21,4 @@ const messageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = new mongoose.model('Message', messageSchema)
+export default new mongoose.model('Message', messageSchema)
