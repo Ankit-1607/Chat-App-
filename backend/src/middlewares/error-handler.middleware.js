@@ -1,5 +1,6 @@
-import { CustomAPIError } from '../errors/index.js';
+import CustomAPIError  from '../errors/custom-error.js';
 import { StatusCodes } from 'http-status-codes';
+
 
 const errorHandlerMiddleware = (err, req, res, next) => {
   // better way??
@@ -18,4 +19,4 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     .send('Something went wrong, pls try again later');
 };
 
-export default errorHandlerMiddleware;
+export default errorHandlerMiddleware

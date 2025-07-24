@@ -3,7 +3,7 @@ import { axiosInstance } from '../lib/axios.js';
 import toast from 'react-hot-toast';
 import { io } from 'socket.io-client'
 
-const BASE_URL = import.meta.env.MODE === "developement" ?'http://localhost:5001' : '/';
+const BASE_URL = import.meta.env.MODE === "development" ?'http://localhost:5001' : '/'; // for socket.io only
 
 // custom hook for user authentication state
 export const useAuthStore = create((set, get) => ({
@@ -21,7 +21,7 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     try {
-      const response = await axiosInstance.get('/auth/check');
+      const response = await axiosInstance.get('/auth/check'); // axiosInstance baseURL already includes /api/v1
 
       set({authUser: response.data})
       get().connectSocket();

@@ -1,9 +1,7 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/user.model.js';
-import { 
-  NotFoundError, 
-  UnauthenticatedError 
-} from '../errors/index.js';
+import jwt from 'jsonwebtoken'
+import User from '../models/user.model.js'
+import { NotFoundError, 
+  UnauthenticatedError } from '../errors/index.js'
 
 const protectRoute = async (req, res, next) => {
   const token = req.cookies.token

@@ -1,5 +1,6 @@
 import User from '../models/user.model.js';
-import { BadRequestError } from '../errors/index.js';
+import BadRequestError from '../errors/bad-request.js';
+
 import bcrypt from 'bcryptjs';
 import generateToken from '../lib/utils.js';
 import cloudinary from '../lib/cloudinary.js';

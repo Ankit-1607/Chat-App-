@@ -1,7 +1,9 @@
-import 'dotenv/config';
-import 'express-async-errors';
+import dotenv from 'dotenv';
+import 'express-async-errors'; // to handle async errors in express routes
+dotenv.config(); // load environment variables from .env file
 
-import { app, server } from './lib/socket.js';
+import {app, server} from './lib/socket.js'; // import socket.io setup
+
 import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -16,7 +18,8 @@ import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js';
 
 // setup DB
-import connectDB from './db/connect.db.js';
+import connectDB from './db/connect.db.js'; // ensure DB connection is established
+
 
 // middlewares
 app.use(express.json()) // for parsing req object
@@ -31,7 +34,7 @@ app.use(cors( // to allow cookie and authorization header to be send with the re
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/messages', messageRoutes);
 
-app.use(notFoundMiddleware)
+
 app.use(errorHandlerMiddleware)
 
 
@@ -45,7 +48,7 @@ if(process.env.NODE_ENV==='production') {
     res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'))
   })
 }
-
+app.use(notFoundMiddleware)
 const start = async () => {
   try {
     // connecting to DB

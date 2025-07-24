@@ -1,12 +1,12 @@
-import express from 'express';
-import protectRoute from '../middlewares/protect-route.middleware.js';
+import express from "express";
+import protectRoute from "../middlewares/protect-route.middleware.js";
+
 import {
   getUsersForSidebar,
   getMessages,
   sendMessage
-} from '../controllers/message.controller.js';
-
-const router = express.Router()
+} from "../controllers/message.controller.js";
+const router = express.Router();
 
 router.get('/users', protectRoute, getUsersForSidebar)
 router.get('/:id', protectRoute, getMessages)
