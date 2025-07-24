@@ -3,6 +3,7 @@ import 'express-async-errors'; // to handle async errors in express routes
 dotenv.config(); // load environment variables from .env file
 
 import {app, server} from './lib/socket.js'; // import socket.io setup
+
 import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -18,6 +19,7 @@ import messageRoutes from './routes/message.route.js';
 
 // setup DB
 import connectDB from './db/connect.db.js'; // ensure DB connection is established
+
 
 // middlewares
 app.use(express.json()) // for parsing req object
